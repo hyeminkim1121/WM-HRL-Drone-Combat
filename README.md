@@ -1,6 +1,6 @@
 # WM+HRL: World Model-based Hierarchical Reinforcement Learning for Multi-Drone Combat Simulation
 
-계층적 구조 기반 World Model 강화학습을 통한 다중 드론 전투 시뮬레이션에 관한 연구
+Combining TSSM-based World Model with hierarchical decision making for sample-efficient multi-drone combat simulation.
 
 ## Requirements
 
@@ -107,9 +107,6 @@ python eval_head_to_head.py \
 - Observation: 120-dim global state
 - Reward: event-driven (base destruction) + time penalty
 
-## Citation
+## License
 
-```
-김혜민, "계층적 구조 기반 World Model 강화학습을 통한 다중 드론 전투 시뮬레이션에 관한 연구",
-한국시뮬레이션학회논문지, 2026.
-```
+This project is for academic research purposes.
