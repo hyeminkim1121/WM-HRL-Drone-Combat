@@ -1,20 +1,20 @@
-"""run_revision_experiments.py — 리비전 실험 일괄 실행 스크립트.
+"""run_revision_experiments.py — 실험 일괄 실행 스크립트.
 
 실험 목록:
-  0. WM+HRL baseline 재학습 (3 seeds, K=10, H=15)
-  1. PPO+HRL 재학습 (3 seeds)
-  2. Ablation: K 변화 (K=1, 5, 20)  — baseline K=10은 wm_baseline 사용
-  3. Ablation: H 변화 (H=5, 10, 25) — baseline H=15는 wm_baseline 사용
+  0. WM+HRL baseline (3 seeds, K=10, H=15)
+  1. PPO+HRL baseline (3 seeds)
+  2. Ablation: K 변화 (K=1, 5, 20)
+  3. Ablation: H 변화 (H=5, 10, 25)
   4. Ablation: Entity Encoder 제거 (use_entity_encoder=False)
 
 실행:
-  python run_revision_experiments.py --exp wm_baseline  # WM+HRL baseline만
-  python run_revision_experiments.py --exp ppo          # PPO 재학습만
-  python run_revision_experiments.py --exp ablation_k   # K 변화만
-  python run_revision_experiments.py --exp ablation_h   # H 변화만
-  python run_revision_experiments.py --exp ablation_ee  # Entity Encoder 제거만
-  python run_revision_experiments.py --exp all          # 전부
-  python run_revision_experiments.py --exp all --wandb  # wandb 연동
+  python run_revision_experiments.py --exp wm_baseline
+  python run_revision_experiments.py --exp ppo
+  python run_revision_experiments.py --exp ablation_k
+  python run_revision_experiments.py --exp ablation_h
+  python run_revision_experiments.py --exp ablation_ee
+  python run_revision_experiments.py --exp all
+  python run_revision_experiments.py --exp all --wandb
 """
 import argparse
 import copy
@@ -187,7 +187,7 @@ def run_ablation_entity_encoder(seeds, use_wandb=False, device="cuda"):
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="리비전 실험 일괄 실행")
+    p = argparse.ArgumentParser(description="실험 일괄 실행")
     p.add_argument("--exp", type=str, default="all",
                    choices=["wm_baseline", "ppo", "ablation_k", "ablation_h", "ablation_ee", "all"],
                    help="실행할 실험 종류")

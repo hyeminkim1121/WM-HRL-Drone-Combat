@@ -346,7 +346,7 @@ class WMUpperTrainerV2:
         cur_onehot   = np.zeros(self.n_agents * self.n_targets, dtype=np.float32)    # 현재 one-hot 액션
         cum_rew      = 0.0
         step_in_K    = 0   # 현재 K-step 사이클 내 위치 (0 ~ K-1)
-        env_steps    = 0   # 실제 env.step 호출 횟수 (논문 length 지표)
+        env_steps    = 0   # 실제 env.step 호출 횟수
         terminal_obs = None   # reward-on-arrival 정렬용 종말 상태 (종말 보상 보존)
 
         # warmup 전략: 50% 랜덤 / 50% 순차 배정 (드론 i → 기지 i)
@@ -574,7 +574,7 @@ class WMUpperTrainerV2:
 
         rsa = env._current_strategy
 
-        # ── Episode meta (논문 figure/table 용 지표) ──────────────────────
+        # ── Episode meta ──────────────────────────────────────────────────
         won  = bool(last_infos.get("won",  False))
         lost = bool(last_infos.get("lost", False))
         enemy_bases_destroyed = sum(1 for b in env._enemy_bases if not b.alive)

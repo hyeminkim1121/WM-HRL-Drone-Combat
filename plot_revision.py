@@ -1,4 +1,4 @@
-"""plot_revision.py — 리비전 실험 결과 그래프 생성.
+"""plot_revision.py — 실험 결과 그래프 생성.
 
 사용법:
   python plot_revision.py                    # 모든 그래프 생성

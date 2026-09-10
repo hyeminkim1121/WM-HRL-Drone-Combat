@@ -1,4 +1,4 @@
-"""train_wm.py — WM+HRL 학습 엔트리포인트 (한국시뮬레이션학회 논문용).
+"""train_wm.py — WM+HRL 학습 엔트리포인트.
 
 실행:
   python train_wm.py --seed 42 --name wm_s0 --wandb

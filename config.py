@@ -1,18 +1,15 @@
-"""config.py — 한국시뮬레이션학회 논문용 설정.
+"""config.py — WM+HRL 하이퍼파라미터 설정.
 
-논문: "계층적 구조 기반 World Model 강화학습을 통한 다중 드론 전투 시뮬레이션에 관한 연구"
 스펙: h ∈ R^256, z ∈ R^16 (4 categoricals × 4 classes), feat ∈ R^272
       8 agents × 8 targets = 64-dim action, K=10, H=15
       Phase 1: 10K episodes (WM warmup), Total: 100K episodes
-
-NOTE: 0622/ (SCI용) 코드와 독립. 이 파일은 한국시뮬레이션학회 리비전 대응 전용.
 """
 
 K = 10
 WANDB_PROJECT = "KSIM-WM-HRL"
 WANDB_ENTITY  = None
 
-# 논문 Table A1 / Table 2 에 기재된 하이퍼파라미터와 1:1 대응
+# 환경 설정
 ENV_CFG = {
     "max_episode_steps":   500,
     "high_level_interval": K,
@@ -44,7 +41,7 @@ ENV_CFG = {
     "enemy_strategy": "mirror",
 }
 
-# 논문 스펙 상수
+# 스펙 상수
 N_AGENTS   = 8    # 공격 5 + 방어 3
 N_TARGETS  = 8    # 적 기지 5 + 적 방어드론 3
 STATE_DIM  = 120  # (8+8)×5 + (5+5)×4
@@ -60,7 +57,7 @@ WM_CFG = {
             ("enemy_drone", 8, 5),
             ("enemy_base",  5, 4),
         ],
-        # 논문 3.2절: h ∈ R^256, z ∈ R^16
+        # h ∈ R^256, z ∈ R^16
         "n_categoricals": 4,
         "n_classes":      4,
         "deter_size":     256,
@@ -80,7 +77,7 @@ WM_CFG = {
         "recon_scale":  1.0,
         "reward_scale": 1.0,
         "cont_scale":   1.0,
-        # AEC 비활성 (한국시뮬레이션학회 논문에서 미사용)
+        # AEC 비활성
         "aec_beta":      0.0,
         "aec_embed_dim": 64,
         # RL
@@ -93,9 +90,9 @@ WM_CFG = {
     "n_action_targets":   N_TARGETS,
     "n_action_attackers": 5,
     "n_action_ally_zones": 5,
-    # 학습 스케줄 (논문 3.4절, Table A1)
+    # 학습 스케줄
     "total_steps":       100_000,      # 100K episodes
-    "wm_warmup_steps":   10_000,       # Phase 1: 10K episodes (심사용 원본 기준)
+    "wm_warmup_steps":   10_000,       # Phase 1: 10K episodes
     "seq_len":           25,
     "batch_size":        64,           # Table A1
     "wm_lr":             3e-4,         # Table A1
@@ -110,15 +107,15 @@ WM_CFG = {
 }
 
 # ── make_configs 호환 함수 (train_ppo_hrl.py, head2head.py 등에서 호출) ──
-# 한국시뮬레이션학회 논문은 8×8 고정이므로 인자를 무시하고 고정 설정 반환
+# 8×8 고정이므로 인자를 무시하고 고정 설정 반환
 def make_configs(n_ally_attack=5, n_ally_defend=3, n_ally_base=5,
                  n_enemy_attack=5, n_enemy_defend=3, n_enemy_base=5,
                  base_hp=130, model_size="small"):
-    """0622/ make_configs 호환. 논문 고정 설정 반환."""
+    """고정 설정 반환."""
     return dict(ENV_CFG), dict(WM_CFG)
 
 
-# PPO baseline 설정 (논문 5.1절: "PPO 알고리즘의 표준 하이퍼파라미터")
+# PPO baseline 설정
 PPO_CFG = {
     "total_episodes":  100_000,
     "lr":              3e-4,
