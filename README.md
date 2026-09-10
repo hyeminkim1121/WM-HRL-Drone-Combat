@@ -16,7 +16,7 @@ pip install torch numpy pandas matplotlib wandb
 
 ```
 code/
-├── config.py              # Hyperparameters (Table A1)
+├── config.py              # Hyperparameters
 ├── train_wm.py            # WM+HRL training entry point
 ├── train_ppo_hrl.py       # PPO+HRL baseline training entry point
 ├── wm_upper_v2.py         # WM+HRL trainer (core)
